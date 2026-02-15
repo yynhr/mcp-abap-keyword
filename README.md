@@ -8,7 +8,7 @@ A Model Context Protocol (MCP) server for accessing ABAP Keyword Documentation f
 - 📖 Look up terms in the ABAP Glossary  
 - 📚 Browse ABAP topics (Dictionary, CDS, Programming Language, RAP, etc.)
 - 🗂️ Navigate the main documentation structure
-- ⚡ Intelligent caching system for fast repeated queries (24-hour cache TTL)
+- ⚡ Intelligent caching system for fast repeated queries (1-year cache TTL)
 - 🚀 Up to 44x faster response times for cached content
 
 ## Installation

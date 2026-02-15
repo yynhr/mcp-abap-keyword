@@ -23,7 +23,7 @@ const ABAP_DOC_BASE = "https://help.sap.com/doc/abapdocu_latest_index_htm/latest
 
 // Cache configuration - use script directory instead of cwd for consistent cache location
 const CACHE_DIR = path.join(__dirname, "..", "cache");
-const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours in milliseconds (configurable)
+const CACHE_TTL = 365 * 24 * 60 * 60 * 1000; // 1 year in milliseconds (configurable)
 
 function normalizeWhitespace(text: string): string {
   return text.replace(/\s+/g, " ").trim();
