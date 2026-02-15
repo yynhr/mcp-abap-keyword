@@ -11,6 +11,71 @@ A Model Context Protocol (MCP) server for accessing ABAP Keyword Documentation f
 - ⚡ Intelligent caching system for fast repeated queries (1-year cache TTL)
 - 🚀 Up to 44x faster response times for cached content
 
+## Prerequisites
+
+- Node.js 18.0.0 or higher
+- npm 9.0.0 or higher
+- TypeScript 5.3.0 or higher
+
+## Node.js Setup Guide
+
+### macOS
+
+#### Option 1: Using Homebrew (Recommended)
+```bash
+# Install Homebrew if not already installed
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Node.js
+brew install node
+
+# Verify installation
+node --version
+npm --version
+```
+
+#### Option 2: Direct Download
+1. Visit https://nodejs.org/
+2. Download the LTS (Long Term Support) version for macOS
+3. Run the installer and follow the prompts
+4. Verify installation by opening Terminal and running:
+```bash
+node --version
+npm --version
+```
+
+### Windows
+
+#### Option 1: Using Installer (Recommended)
+1. Visit https://nodejs.org/
+2. Download the LTS version for Windows
+3. Run the `.msi` installer
+4. Follow the installation wizard (accept default settings)
+5. Open Command Prompt and verify:
+```bash
+node --version
+npm --version
+```
+
+#### Option 2: Using Chocolatey
+```powershell
+# If Chocolatey is installed
+choco install nodejs
+
+# Verify installation
+node --version
+npm --version
+```
+
+#### Option 3: Using Windows Package Manager
+```powershell
+winget install OpenJS.NodeJS
+
+# Verify installation
+node --version
+npm --version
+```
+
 ## Installation
 
 ```bash
