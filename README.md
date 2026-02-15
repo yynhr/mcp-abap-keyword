@@ -2,6 +2,10 @@
 
 A Model Context Protocol (MCP) server for accessing ABAP Keyword Documentation from SAP's official documentation site (https://help.sap.com).
 
+> 📚 **Available Languages:**
+> - English (this file)
+> - [日本語](README.ja.md) (Japanese)
+
 ## Features
 
 - 🔍 Search for ABAP keywords in the official ABAP Index
@@ -169,15 +173,20 @@ Browse all main topics in the ABAP Keyword Documentation. Returns a categorized 
 
 ## Configuration
 
-To use this server with Claude Desktop or other MCP clients, add the following to your MCP settings configuration file:
+### Cline (VS Code Extension)
 
-### Claude Desktop (macOS)
+To use this MCP server with [Cline](https://github.com/cline/cline), follow these steps:
 
-Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
+#### macOS
+
+1. Install the Cline extension in VS Code
+2. Open VS Code settings (Code > Preferences > Settings or Cmd+,)
+3. Search for "Cline" and find the MCP settings section
+4. Add the server configuration to your `settings.json`:
 
 ```json
 {
-  "mcpServers": {
+  "cline.mcpServers": {
     "mcp-abap-keyword": {
       "command": "node",
       "args": ["/absolute/path/to/mcp-abap-keyword/build/index.js"]
@@ -186,16 +195,45 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
 }
 ```
 
-### Claude Desktop (Windows)
-
-Edit `%APPDATA%\Claude\claude_desktop_config.json`:
+Alternatively, edit `.vscode/settings.json` in your workspace:
 
 ```json
 {
-  "mcpServers": {
+  "cline.mcpServers": {
+    "mcp-abap-keyword": {
+      "command": "node",
+      "args": ["${workspaceFolder}/../mcp-abap-keyword/build/index.js"]
+    }
+  }
+}
+```
+
+#### Windows
+
+1. Install the Cline extension in VS Code
+2. Open VS Code settings (File > Preferences > Settings or Ctrl+,)
+3. Search for "Cline" and find the MCP settings section
+4. Add the server configuration to your `settings.json`:
+
+```json
+{
+  "cline.mcpServers": {
     "mcp-abap-keyword": {
       "command": "node",
       "args": ["C:\\absolute\\path\\to\\mcp-abap-keyword\\build\\index.js"]
+    }
+  }
+}
+```
+
+Alternatively, edit `.vscode\settings.json` in your workspace:
+
+```json
+{
+  "cline.mcpServers": {
+    "mcp-abap-keyword": {
+      "command": "node",
+      "args": ["${workspaceFolder}\\..\\mcp-abap-keyword\\build\\index.js"]
     }
   }
 }
@@ -210,18 +248,27 @@ https://help.sap.com/doc/abapdocu_latest_index_htm/latest/en-US/ABENABAP.html
 
 ## Caching
 
-The server implements an intelligent file-based caching system with human-readable files:
-- **Cache Location**: `.cache/` directory in the project root
-- **Cache Format**: Human-readable markdown `.md` files (for viewing) + raw `.html` files (for parsing)
-- **File Names**: Descriptive names like `ap-index.md`, `cds.md` (easy to browse)
-- **Cache TTL**: 24 hours (configurable)
-- **Performance**: 20-40x faster for cached responses
-- **Automatic**: No manual cache management required
-- **Cache Invalidation**: Automatic after 24 hours
+The server implements an efficient file-based caching system to improve performance:
+
+- **Cache Location**: `cache/` directory (relative to the script location)
+- **Cache Format**: Gzip-compressed HTML files (`.html.gz`)
+- **File Naming**: SHA256 hashes of page URLs (12-character hex) + `.html.gz` extension
+- **Cache TTL**: 365 days (1 year) - configurable
+- **HTML Cleaning**: Automatically removes unnecessary elements before caching:
+  - External scripts (`<script src>`)
+  - Stylesheet links (`<link>` tags)
+  - Metadata (`<meta>` tags)
+  - Inline styles (`<style>` tags)
+  - Noscript fallbacks (`<noscript>` tags)
+  - HTML comments
+- **Compression**: Uses gzip with maximum compression (level 9) for efficient storage
+- **Automatic Management**: No manual cache management required
+- **Cache Invalidation**: Automatic after 365 days
+- **Performance**: Up to 44x faster response times for cached content
 
 To clear the cache manually:
 ```bash
-rm -rf .cache
+rm -rf cache
 ```
 
 ## License
