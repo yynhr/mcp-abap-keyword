@@ -173,6 +173,56 @@ Browse all main topics in the ABAP Keyword Documentation. Returns a categorized 
 
 ## Configuration
 
+### Claude Desktop / Claude Code
+
+To use this MCP server with Claude Desktop or Claude Code, add the configuration to your Claude config file:
+
+#### macOS/Linux
+
+Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (Claude Desktop) or `~/.config/claude-code/config.json` (Claude Code):
+
+```json
+{
+  "mcpServers": {
+    "mcp-abap-keyword": {
+      "command": "node",
+      "args": ["/absolute/path/to/mcp-abap-keyword/build/index.js"]
+    }
+  }
+}
+```
+
+**Command Line Method:**
+
+```bash
+# Add the MCP server using claude command
+claude mcp add mcp-abap-keyword node /absolute/path/to/mcp-abap-keyword/build/index.js
+```
+
+#### Windows
+
+Edit `%APPDATA%\Claude\claude_desktop_config.json` (Claude Desktop) or `%APPDATA%\claude-code\config.json` (Claude Code):
+
+```json
+{
+  "mcpServers": {
+    "mcp-abap-keyword": {
+      "command": "node",
+      "args": ["C:\\absolute\\path\\to\\mcp-abap-keyword\\build\\index.js"]
+    }
+  }
+}
+```
+
+**Command Line Method:**
+
+```powershell
+# Add the MCP server using claude command
+claude mcp add mcp-abap-keyword node C:\absolute\path\to\mcp-abap-keyword\build\index.js
+```
+
+**Note:** After adding the configuration, restart Claude Desktop or Claude Code for the changes to take effect.
+
 ### Cline (VS Code Extension)
 
 To use this MCP server with [Cline](https://github.com/cline/cline), follow these steps:
